@@ -1,0 +1,18 @@
+{
+  "name": "socket-rps",
+  "version": "1.0.0",
+  "description": "socket for rock-paper-scissors app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "Axel Muñoz <axelskam.123@outlook.es>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "socket.io": "^4.5.4"
+  }
+}
