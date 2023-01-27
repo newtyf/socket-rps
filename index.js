@@ -8,6 +8,8 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const { getWinner } = require("./helpers/getWinner");
 
+const PORT = process.env.PORT || 3000;
+
 const io = new Server(server, {
   cors: {
     origin: process.env.HOST_WEB,
@@ -72,6 +74,6 @@ io.on("connection", (socket) => {
   // });
 });
 
-server.listen(3000, () => {
+server.listen(PORT, () => {
   console.log("listening on *:3000");
 });
