@@ -11,7 +11,7 @@ export default (io) => {
       try {
         const { belongsRoom, userId } = user;
         const { data } = await axios.put(
-          `${process.env.HOST_API}rooms/${belongsRoom}`,
+          `${process.env.HOST_API}rooms/joinRoom/${belongsRoom}`,
           { userId }
         );
 
