@@ -27,6 +27,12 @@ export default (io) => {
       }
     });
 
+    socket.on("join-current-user-room", async (user) => {
+      const { belongsRoom } = user;
+      socket.join(belongsRoom);
+      socket.to(belongsRoom).emit("join-new-player", user);
+    });
+
     socket.on("user-picked", async ({ user, room }) => {
       socket.to(room).emit("alert-user-picked", user);
       console.log("emir");
