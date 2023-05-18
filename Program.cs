@@ -5,6 +5,13 @@ using SocketRps.Hubs;
 
 var myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
+var environment = builder.Environment;
+
+var configuration = new ConfigurationBuilder()
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{environment.EnvironmentName}.json", optional:true, reloadOnChange: true)
+    .Build();
 
 // Cors
 builder.Services.AddCors(options =>
@@ -25,6 +32,7 @@ app.UseCors(myAllowSpecificOrigins);
 app.MapGet("/", () => "Hello World");
 app.MapHub<GameHub>("/gamehub");
 
-var PORT = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+var url = $"{configuration["urlString:url"]}:{port}";
 
-app.Run($"https://localhost:{PORT}");
+app.Run(url);
