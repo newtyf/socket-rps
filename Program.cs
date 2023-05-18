@@ -11,7 +11,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: myAllowSpecificOrigins, policy =>
     {
-        policy.WithOrigins("http://localhost:5173").AllowAnyHeader().WithMethods("GET", "POST").AllowCredentials();
+        policy.WithOrigins("http://localhost:5173").WithOrigins("https://rps.newty.com").AllowAnyHeader().WithMethods("GET", "POST").AllowCredentials();
 
     });
 });
@@ -21,21 +21,10 @@ builder.Services.AddSignalR();
 
 var app = builder.Build();
 
-
-
 app.UseCors(myAllowSpecificOrigins);
-app.MapGet("/", async () =>
-{
-    HttpClient _client = new HttpClient();
-    HttpResponseMessage responseMessage = await _client.GetAsync($"http://localhost:3002/api/rooms/64655a1c8a3430edcd9a0e49");
-            
-    string responseBody = await responseMessage.Content.ReadAsStringAsync();
-    Debug.WriteLine($"aaaaaaaa, {responseBody}");
-    
-    Room room = JsonConvert.DeserializeObject<Room>(responseBody);
-    Debug.WriteLine($"aaaassssaaaa, {room._id}");
-});
-
+app.MapGet("/", () => "Hello World");
 app.MapHub<GameHub>("/gamehub");
 
-app.Run();
+var PORT = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+
+app.Run($"https://localhost:{PORT}");
