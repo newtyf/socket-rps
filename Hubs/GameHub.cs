@@ -19,6 +19,10 @@ public class GameHub: Hub
         await Clients.GroupExcept(room, excludedConnectionId1: Context.ConnectionId).SendAsync("pickGame", name);
     }
     
+    public async Task PlayAgain(string room, string name)
+    {
+        await Clients.GroupExcept(room, excludedConnectionId1: Context.ConnectionId).SendAsync("playAgain", name);
+    }
     public async Task JoinGroup(string id, string room)
     {
         await Groups.AddToGroupAsync(Context.ConnectionId, room);
