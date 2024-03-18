@@ -41,10 +41,10 @@ public class GameHub: Hub
             HttpResponseMessage responseMessage = await _client.GetAsync($"{_configuration["ApiUrlString:api"]}/rooms/{roomId}");
             
             string responseBody = await responseMessage.Content.ReadAsStringAsync();
-            Debug.WriteLine($"aaaaaaaa, {responseBody}");
+            // Debug.WriteLine($"aaaaaaaa, {responseBody}");
             
             Room? room = JsonConvert.DeserializeObject<Room>(responseBody);
-            Debug.WriteLine($"aaaaaaaa, {room._id}");
+            // Debug.WriteLine($"aaaaaaaa, {room._id}");
 
             HttpResponseMessage responseOne =
                 await _client.GetAsync($"{_configuration["ApiUrlString:api"]}/users/{room.users[0]}");
@@ -56,10 +56,10 @@ public class GameHub: Hub
             string responseBodyTwo = await responseTwo.Content.ReadAsStringAsync();
             playerTwo = JsonConvert.DeserializeObject<User>(responseBodyTwo);
             
-            Debug.WriteLine(playerOne.Pick);
-            Debug.WriteLine( playerTwo.Pick);
-            
-            Debug.WriteLine(playerOne.Pick != null && playerTwo.Pick != null);
+            // Debug.WriteLine(playerOne.Pick);
+            // Debug.WriteLine( playerTwo.Pick);
+            //
+            // Debug.WriteLine(playerOne.Pick != null && playerTwo.Pick != null);
 
             if (playerOne.Pick != null && playerTwo.Pick != null)
             {
