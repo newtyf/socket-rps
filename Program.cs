@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: myAllowSpecificOrigins, policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "https://rps.newtyf.com").AllowAnyHeader().WithMethods("GET", "POST").AllowCredentials();
+        policy.WithOrigins("http://localhost:5173", "https://rps.newtyf.com").WithMethods("GET", "POST").AllowCredentials();
 
     });
 });
